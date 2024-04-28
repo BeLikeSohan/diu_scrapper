@@ -16,7 +16,7 @@ class WebsiteScraper(CrawlSpider):
     name = 'website_scraper'
     allowed_domains = ['daffodilvarsity.edu.bd']
     start_urls = ['https://daffodilvarsity.edu.bd']
-    deny_domains = ['forum.daffodilvarsity.edu.bd', 'opac.daffodilvarsity.edu.bd', 'koha.daffodilvarsity.edu.bd']
+    deny_domains = ['forum.daffodilvarsity.edu.bd', 'opac.daffodilvarsity.edu.bd', 'koha.daffodilvarsity.edu.bd', 'www.pinterest.com', 'api.whatsapp.com']
 
     rules = (
         Rule(LinkExtractor(allow=allowed_domains, deny=deny_domains), callback='parse_page', follow=True),
