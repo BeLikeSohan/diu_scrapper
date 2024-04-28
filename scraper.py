@@ -26,11 +26,12 @@ class WebsiteScraper(CrawlSpider):
         super(WebsiteScraper, self).__init__(*args, **kwargs)
         self.file_count = 1
         self.url_mapping = {}
-        os.makedirs('dump', exist_ok=True)  # Create the dump folder if it doesn't exist
+        os.makedirs('dump', exist_ok=True)
 
     def parse_page(self, response):
-        if "https://daffodilvarsity.edu.bd/" not in response.url:
-            return
+        for url in self.deny_domains:
+            if url in response.url:
+                return;
         print(f"Scraping: {response.url}")
         url = response.url
         content_type = response.headers.get('Content-Type', '').decode('ascii')
