@@ -16,8 +16,8 @@ class WebsiteScraper(CrawlSpider):
     name = 'website_scraper'
     allowed_domains = ['daffodilvarsity.edu.bd']
     start_urls = ['https://daffodilvarsity.edu.bd']
-    deny_domains = ['forum.daffodilvarsity.edu.bd', 'opac.daffodilvarsity.edu.bd', 'koha.daffodilvarsity.edu.bd', 'www.pinterest.com', 'api.whatsapp.com']
-
+    deny_domains = ['forum.daffodilvarsity.edu.bd', 'opac.daffodilvarsity.edu.bd', 'koha.daffodilvarsity.edu.bd',
+                    'www.pinterest.com', 'api.whatsapp.com', 'elearn.daffodilvarsity.edu.bd']
     rules = (
         Rule(LinkExtractor(allow=allowed_domains, deny=deny_domains), callback='parse_page', follow=True),
     )
@@ -61,7 +61,7 @@ class WebsiteScraper(CrawlSpider):
 
     def _url_for_allowed_domain(self, url):
         domain = urlparse(url).netloc
-        return domain in self.allowed_domains and domain not in self.deny_domains
+        return domain.endswith('.daffodilvarsity.edu.bd')
 
     def close(self, reason):
         super().close(self, reason)
